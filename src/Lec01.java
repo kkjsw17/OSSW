@@ -28,7 +28,7 @@ public class Lec01 {
 		Element docs = document.createElement("docs");
 		document.appendChild(docs);
 		
-		String path = "./src/data/html";
+		String path = "data/html";
 		File[] files = makeFileList(path);
 		                          
 		for (int i = 0; i < files.length; i++) {
@@ -53,9 +53,10 @@ public class Lec01 {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new FileOutputStream(new File("src/data/file.xml")));
+		StreamResult result = new StreamResult(new FileOutputStream(new File("data/file.xml")));
 		
 		transformer.transform(source, result);
 	}
