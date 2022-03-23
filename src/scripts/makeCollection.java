@@ -1,4 +1,4 @@
-package lec01;
+package scripts;
 
 import org.jsoup.Jsoup;
 import org.w3c.dom.Document;
@@ -11,15 +11,19 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 
-public class Lec01 {
-	public static void main(String args[]) throws ParserConfigurationException, IOException, TransformerException {
+public class makeCollection {
+	private String data_path;
+	private String output_path = "src/data/collection.xml";
+
+	public makeCollection(String path) throws IOException {
+		this.data_path = path;
+	}
+
+	public void makeXml() throws ParserConfigurationException, IOException, TransformerException {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 		
@@ -27,9 +31,8 @@ public class Lec01 {
 		
 		Element docs = document.createElement("docs");
 		document.appendChild(docs);
-		
-		String path = "data/html";
-		File[] files = makeFileList(path);
+
+		File[] files = makeFileList(data_path);
 		                          
 		for (int i = 0; i < files.length; i++) {
 			org.jsoup.nodes.Document html = Jsoup.parse(files[i], "UTF-8");
@@ -56,7 +59,7 @@ public class Lec01 {
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new FileOutputStream(new File("data/file.xml")));
+		StreamResult result = new StreamResult(new FileOutputStream(new File(output_path)));
 		
 		transformer.transform(source, result);
 	}
