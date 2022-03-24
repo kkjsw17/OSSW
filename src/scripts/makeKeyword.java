@@ -22,15 +22,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class makeKeyword {
-	private String input_path;
-	private String output_path = "src/data/index.xml";
+	private String input_file;
+	private String output_file = "index.xml";
 
-	public makeKeyword(String path) {
-		this.input_path = path;
+	public makeKeyword(String file) {
+		this.input_file = file;
 	}
 
 	public void convertXml() throws ParserConfigurationException, IOException, SAXException, TransformerException {
-		File file = new File(input_path);
+		File file = new File(input_file);
 
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -57,7 +57,7 @@ public class makeKeyword {
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new FileOutputStream(new File(output_path)));
+		StreamResult result = new StreamResult(new FileOutputStream(new File(output_file)));
 
 		transformer.transform(source, result);
 	}

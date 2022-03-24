@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 
 public class makeCollection {
 	private String data_path;
-	private String output_path = "src/data/collection.xml";
+	private String output_file = "collection.xml";
 
 	public makeCollection(String path) throws IOException {
 		this.data_path = path;
@@ -59,7 +59,7 @@ public class makeCollection {
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new FileOutputStream(new File(output_path)));
+		StreamResult result = new StreamResult(new FileOutputStream(new File(output_file)));
 		
 		transformer.transform(source, result);
 	}
