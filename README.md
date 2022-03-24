@@ -14,3 +14,7 @@ java -cp jars/jsoup-1.14.3.jar:jars/kkma-2.1.jar:bin scripts.main -c ./data
 ```
 java -cp jars/jsoup-1.14.3.jar:jars/kkma-2.1.jar:bin scripts.main -k ./collection.xml
 ```
+#### 3. indexer (4th week)
+```
+java -cp jars/jsoup-1.14.3.jar:jars/kkma-2.1.jar:bin scripts.main -i ./index.xml
+```
