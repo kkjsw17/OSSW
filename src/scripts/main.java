@@ -7,7 +7,7 @@ import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 public class main {
-    public static void main(String args[]) throws IOException, TransformerException, ParserConfigurationException, SAXException {
+    public static void main(String args[]) throws IOException, TransformerException, ParserConfigurationException, SAXException, ClassNotFoundException {
         String command = args[0];
         String path = args[1];
 
@@ -18,6 +18,11 @@ public class main {
         else if(command.equals("-k")) {
             makeKeyword keyword = new makeKeyword(path);
             keyword.convertXml();
+        }
+        else if(command.equals("-i")) {
+            indexer keyword = new indexer(path);
+            keyword.makeIndex();
+            keyword.showIndex();
         }
     }
 }
