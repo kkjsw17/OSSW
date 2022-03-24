@@ -1,4 +1,4 @@
-# OSSW
+# OpenSW
 2022-2 Konkuk Univ. INTRODUCTION TO OPEN SOURCE SOFTWARE
 
 ## Compile
