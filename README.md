@@ -19,4 +19,6 @@ java -cp jars/kkma-2.1.jar:bin scripts.main -k ./collection.xml
 java -cp jars/kkma-2.1.jar:bin scripts.main -i ./index.xml
 ```
 #### 4. searcher (5th week)
+```
 java -cp jars/kkma-2.1.jar:bin scripts.main -s ./index.post -q "크림 파스타는 분말 가루를 뭉쳐 향신료가 들어간 크림을 뿌린다."
+```
