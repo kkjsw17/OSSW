@@ -79,13 +79,22 @@ public class searcher {
         HashMap<String, Double> sortedSimilarityMap = sortByValue(similarityMap);
         ArrayList<String> keys = new ArrayList(sortedSimilarityMap.keySet());
 
-        System.out.println("\"" + query + "\" 와의 유사도 측정 결과 상위 3개 문서 제목");
+        System.out.println("\"" + query + "\" 와의 유사도 측정 결과 상위 3개 문서 제목\n");
+
+        boolean flag = false;
 
         for (int i = 0; i < 3; i++) {
             String key = keys.get(i);
-            String title = titleMap.get(key);
 
-            System.out.println(title);
+            if (sortedSimilarityMap.get(key) != 0) {
+                String title = titleMap.get(key);
+                flag = true;
+                System.out.println(title);
+            }
+        }
+
+        if (!flag) {
+            System.out.println("검색된 문서가 없습니다.");
         }
     }
 
