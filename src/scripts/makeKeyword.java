@@ -11,12 +11,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.jsoup.Jsoup;
 import org.snu.ids.kkma.index.Keyword;
 import org.snu.ids.kkma.index.KeywordExtractor;
 import org.snu.ids.kkma.index.KeywordList;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -45,8 +43,7 @@ public class makeKeyword {
 			KeywordList kl = ke.extractKeyword(nNode.getTextContent(), true);
 
 			String output = "";
-			for (int j = 0; j < kl.size(); j++) {
-				Keyword kwrd = kl.get(j);
+			for (Keyword kwrd : kl) {
 				output += kwrd.getString() + ":" + kwrd.getCnt() + "#";
 				nNode.setTextContent(output);
 			}

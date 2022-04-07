@@ -1,8 +1,5 @@
 package scripts;
 
-import org.snu.ids.kkma.index.Keyword;
-import org.snu.ids.kkma.index.KeywordExtractor;
-import org.snu.ids.kkma.index.KeywordList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,7 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class indexer {
     private String input_file;
@@ -60,11 +56,11 @@ public class indexer {
             TermFrequencyMapList.add(TermFrequencyMap);
         }
 
-        HashMap<String, String> IndexMap = new HashMap<>();
+        HashMap<String, HashMap<String, Double>> IndexMap = new HashMap<>();
 
         for (String term : DocumentFrequencyMap.keySet()) {
             int documentFrequency = DocumentFrequencyMap.get(term);
-            StringBuilder output = new StringBuilder();
+            HashMap<String, Double> result = new HashMap<>();
 
             for (int i = 0; i < documentNum; i++) {
                 HashMap<String, Integer> TermFrequencyMap = TermFrequencyMapList.get(i);
@@ -73,10 +69,10 @@ public class indexer {
                 termFrequency = TermFrequencyMap.getOrDefault(term, 0);
 
                 double tf_idf = termFrequency * Math.log(documentNum / documentFrequency);
-                output.append(String.format("%d %.2f ", i, tf_idf));
+                result.put(String.format("%d", i), tf_idf);
             }
 
-            IndexMap.put(term, output.toString());
+            IndexMap.put(term, result);
         }
 
         FileOutputStream fileStream = new FileOutputStream(output_file);
@@ -94,12 +90,17 @@ public class indexer {
         objectInputStream.close();
 
         HashMap hashMap = (HashMap) object;
-        Iterator<String> it = hashMap.keySet().iterator();
 
-        while (it.hasNext()) {
-            String key = it.next();
-            String value = (String) hashMap.get(key);
-            System.out.println(key + " -> " + value);
+        for (Object key : hashMap.keySet()) {
+            HashMap valueMap = (HashMap) hashMap.get(key);
+            StringBuilder result = new StringBuilder();
+
+            for (Object valueKey : valueMap.keySet()) {
+                double value = (double) valueMap.get(valueKey);
+                result.append(String.format("%s %.2f ", valueKey, value));
+            }
+
+            System.out.println(key + " -> " + result);
         }
     }
 }
