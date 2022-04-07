@@ -24,5 +24,17 @@ public class main {
             keyword.makeIndex();
             keyword.showIndex();
         }
+        else if (command.equals("-s")) {
+            searcher title = new searcher(path);
+
+            if (args.length == 4) {
+                String subcommand = args[2];
+                String query = args[3];
+
+                if (subcommand.equals("-q")) {
+                    title.calcSim(query);
+                }
+            }
+        }
     }
 }
