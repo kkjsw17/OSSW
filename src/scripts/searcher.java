@@ -25,7 +25,7 @@ public class searcher {
         this.input_file = file;
     }
 
-    public void calcSim(String query) throws IOException, ClassNotFoundException, ParserConfigurationException, SAXException {
+    public void calcSimTemp(String query) throws IOException, ClassNotFoundException, ParserConfigurationException, SAXException {
         FileInputStream fileStream = new FileInputStream(input_file);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileStream);
 
