@@ -36,5 +36,17 @@ public class main {
                 }
             }
         }
+        else if(command.equals("-m")) {
+            MidTerm midTerm = new MidTerm(path);
+
+            if (args.length == 4) {
+                String subcommand = args[2];
+                String query = args[3];
+
+                if (subcommand.equals("-q")) {
+                    midTerm.showSnippet(query);
+                }
+            }
+        }
     }
 }
