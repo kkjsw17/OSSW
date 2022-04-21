@@ -81,6 +81,7 @@ public class MidTerm {
 
         for (String content : sortedSnippetMap.keySet()) {
             System.out.println(content.toString());
+
         }
     }
 
