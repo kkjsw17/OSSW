@@ -1,5 +1,6 @@
 package scripts;
 
+import org.json.simple.parser.ParseException;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -7,9 +8,12 @@ import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 public class main {
-    public static void main(String args[]) throws IOException, TransformerException, ParserConfigurationException, SAXException, ClassNotFoundException {
+    public static void main(String args[]) throws IOException, TransformerException, ParserConfigurationException, SAXException, ClassNotFoundException, ParseException {
         String command = args[0];
-        String path = args[1];
+        String path = "";
+        if (args.length > 1) {
+            path = args[1];
+        }
 
         if(command.equals("-c")) {
             makeCollection collection = new makeCollection(path);
@@ -47,6 +51,11 @@ public class main {
                     midTerm.showSnippet(query);
                 }
             }
+        }
+        else if(command.equals("-ms")) {
+            movieSearcher searcher = new movieSearcher();
+
+            searcher.search();
         }
     }
 }
